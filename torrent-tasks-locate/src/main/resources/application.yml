@@ -1,0 +1,7 @@
+spring:
+  main:
+    banner-mode: off
+  cloud:
+    task:
+      closecontext_enabled: true
+      initialize-enabled: true
