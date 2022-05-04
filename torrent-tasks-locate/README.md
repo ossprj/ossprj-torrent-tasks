@@ -4,7 +4,7 @@ Locate fileset(s) that match up to torrent(s) and generate a report
 
 ### Search Path
 
-[Search Path](https://github.com/ossprj/ossprj-commons/tree/main/ossprj-commons-file#searchpath--getpathsfromsearchpaths) consists of a base path and a search depth. 
+[Search Path](https://github.com/ossprj/ossprj-commons/tree/main/ossprj-commons-file#searchpath) consists of a base path and a search depth. 
 
 The base path will be searched at the specified depth and all directories found at that level will be included in the final list of candidate filesets.
 
