@@ -107,5 +107,10 @@ Ensure the application.yml is in the same directory from which you run the jar
 
     java -jar torrent-tasks-locate-1.0.0-SNAPSHOT.jar 
 
+Alternatively you can specify a "Spring Profile" to control which application-XXX.yml file is used as the configuration file. The following:
+
+    java -Dspring.profiles.active=HandleMissingAndIncomplete -jar torrent-tasks-locate-1.0.0-SNAPSHOT.jar
+
+will use the configuration from the application-HandleMissingAndIncomplete.yml file
 
 
