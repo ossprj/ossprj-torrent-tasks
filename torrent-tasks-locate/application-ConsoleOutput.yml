@@ -1,0 +1,38 @@
+locateFilesetByTorrent:
+
+  # In this example the directory structure is /Collection/Volume/Partition/Fileset(s)
+  # So fileset(s) live at depth 2 below each Volume
+  # i.e.
+  # /archive1-ro/Disk01/Partition1/Fileset1
+  # /archive1-ro/Disk01/Partition2/Fileset2
+  # /archive1-ro/Disk02/Partition3/Fileset3
+  # /archive1-ro/Disk02/Partition4/Fileset4
+  # ...
+  filesetSearchPaths:
+    - basePath: /archive1-ro/Disk01
+      searchDepth: 2
+    - basePath: /archive1-ro/Disk02
+      searchDepth: 2
+    - basePath: /archive1-ro/Disk03
+      searchDepth: 2
+    - basePath: /archive1-ro/Disk04
+      searchDepth: 2
+    - basePath: /archive1-ro/Disk05
+      searchDepth: 2
+    - basePath: /archive1-ro/Disk06
+      searchDepth: 2
+
+  # Source directory for torrents used to locate matching filesets
+  # Currently chooses only files with the extension ".torrent"
+  torrentsDirectory: /home/user/TorrentTasks/Torrents.Reseed
+
+
+# Set logging levels
+# TRACE - Highest Level Of Detail
+# DEBUG - Information helpful in debugging issues
+# INFO  - General status information
+# WARN  - Silent except for warnings and errors
+logging:
+  level:
+    root: WARN
+#    com.ossprj.torrent.task: DEBUG
