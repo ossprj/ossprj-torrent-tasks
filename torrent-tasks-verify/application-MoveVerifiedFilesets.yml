@@ -1,0 +1,27 @@
+verifyTorrentFileset:
+
+  # Set the number of threads for verifying Torrent(s)
+  # default: 1
+  numberOfThreads: 2
+
+  # Filesets to be verified
+  # Single level of depth (filesets directly below this directory)
+  filesetsDirectory: /home/user/TorrentTasks/Filesets
+
+  # Torrents to be used for verifying Filesets
+  # Single level of depth
+  torrentsDirectory: /home/user/TorrentTasks/Filesets.Torrents
+
+  # If included, move verified Fileset(s) to this directory
+  # Optional
+  verifiedFilesetsDirectory: /home/user/TorrentTasks/Filesets.Verified
+
+# Set logging levels
+# TRACE - Highest Level Of Detail
+# DEBUG - Information helpful in debugging issues
+# INFO  - General status information
+# WARN  - Silent except for warnings and errors
+logging:
+  level:
+    root: WARN
+#    com.ossprj.torrent.task: INFO
