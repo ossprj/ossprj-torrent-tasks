@@ -59,4 +59,4 @@ NOTE:
 
 Ensure the application.yml is in the same directory from which you run the jar
 
-    java -jar torrent-tasks-report-1.0.0-SNAPSHOT.jar 
+    java -jar ossprj-torrent-tasks-report-1.0.0-SNAPSHOT.jar 
