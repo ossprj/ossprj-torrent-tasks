@@ -6,13 +6,13 @@
 
     <groupId>com.ossprj.torrent</groupId>
     <artifactId>ossprj-torrent-tasks</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>com.ossprj.poms</groupId>
         <artifactId>ossprj-poms-service</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>

@@ -10,18 +10,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
@@ -39,12 +38,12 @@ public class VerifyTorrentFilesetTask {
 
     private void indexTorrentFiles(final Map<String, List<Path>> torrentFilesByFolderName, final List<Path> torrentFiles) {
 
-        logger.info("Processing " + torrentFiles.size() + " torrent files");
+        logger.info("Indexing " + torrentFiles.size() + " torrent files");
 
         torrentFiles.forEach(torrentFile -> {
             try {
                 if (logger.isTraceEnabled()) {
-                    logger.trace("Processing: " + torrentFile.toAbsolutePath().toString());
+                    logger.trace("Indexing: " + torrentFile.toAbsolutePath().toString());
                 }
                 final Torrent torrent = new Torrent(Files.readAllBytes(torrentFile));
 
@@ -59,7 +58,7 @@ public class VerifyTorrentFilesetTask {
                     torrentFilesByFolderName.put(torrent.getName(), torrentPaths);
                 }
 
-            } catch (IOException | URISyntaxException e) {
+            } catch (Exception e) {
                 logger.warn("Failed to load torrent file - " + e.getMessage() + ": " + torrentFile);
             }
 
@@ -73,8 +72,17 @@ public class VerifyTorrentFilesetTask {
 
         return (strings) -> {
 
+            final Predicate<Path> dateFilter = configuration.getTorrentOnOrAfterDate() != null ?
+                    (path) -> path.toFile().lastModified() > configuration.getTorrentOnOrAfterDate().getTime() : (path) -> true;
+
+            final List<Path> rawPathList = Files.list(configuration.getTorrentsDirectory()).collect(Collectors.toList());
+            logger.info("rawPathList.size: " + rawPathList.size());
+
+            final List<Path> filteredPathList = rawPathList.stream().filter(dateFilter).collect(Collectors.toList());
+            logger.info("filteredPathList.size: " + filteredPathList.size());
+
             final Map<String, List<Path>> torrentFilesByFolderName = new HashMap<>();
-            indexTorrentFiles(torrentFilesByFolderName, Files.list(configuration.getTorrentsDirectory()).collect(Collectors.toList()));
+            indexTorrentFiles(torrentFilesByFolderName, filteredPathList);
 
             // Process the filesets
             final List<Path> filesets = Files.list(configuration.getFilesetsDirectory()).collect(Collectors.toList());

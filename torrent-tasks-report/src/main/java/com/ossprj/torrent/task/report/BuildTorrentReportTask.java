@@ -48,7 +48,7 @@ public class BuildTorrentReportTask {
                 tokenValues.put("creationDate", torrent.getCreationDate() != null ? torrent.getCreationDate().toString() : "");
                 tokenValues.put("comment", torrent.getComment() != null ? torrent.getComment() : "");
                 tokenValues.put("files", torrent.getFiles().stream().map(tf -> tf.getLength() + ":" + tf.getPath()).reduce((a, b) -> a + "|" + b).get());
-                tokenValues.put("infoHash", torrent.getInfoHash());
+                tokenValues.put("infoHash", torrent.getInfoHashHex());
                 tokenValues.put("name", torrent.getName() != null ? torrent.getName() : "");
                 tokenValues.put("pieceLength", torrent.getPieceLength().toString());
 

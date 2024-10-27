@@ -16,6 +16,9 @@ verifyTorrentFileset:
   # Optional
   verifiedFilesetsDirectory: /home/user/TorrentTasks/Filesets.Verified
 
+  # Only process torrent files created after a specific date
+  torrentOnOrAfterDate: 2023-02-01 00:00:00
+
 # Set logging levels
 # TRACE - Highest Level Of Detail
 # DEBUG - Information helpful in debugging issues
